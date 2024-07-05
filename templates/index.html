@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SAP BOM Retriever</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            color: white;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">SAP BOM Retriever</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="bomForm">
+                            <div class="form-group">
+                                <label for="material">Material</label>
+                                <input type="text" class="form-control" id="material" name="material" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="plant">Plant</label>
+                                <input type="text" class="form-control" id="plant" name="plant" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bomUsage">BOM Usage</label>
+                                <input type="text" class="form-control" id="bomUsage" name="bomUsage" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Retrieve BOM</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+  
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#bomForm').submit(function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                $('#loadingOverlay').show();
+                $.ajax({
+                    type: 'POST',
+                    url: '/retrieve_bom',
+                    data: formData,
+                    success: function(response) {
+                        $('#loadingOverlay').hide();
+                        $('body').html(response);
+                    },
+                    error: function(error) {
+                        $('#loadingOverlay').hide();
+                        alert('Error retrieving BOM data. Please try again.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

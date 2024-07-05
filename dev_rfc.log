@@ -1,0 +1,38 @@
+
+**** Log file opened at 2024-07-02 09:56:11.207308 UTC+01:00 (Afr. centrale Ouest), Encoding UTF-8
+NW RFC Library: Kernel variant, Release 750 Patch Level 11
+Compilation date          : Feb 23 2023 04:53:17
+CPIC library              : 753.2022.12.23 version 3
+NI library                : 40
+Kernel Release            : 753 Patch Level 1120
+Current working directory : C:\Users\Ghaith.bentouati\OneDrive - Sumitomo Wiring Systems\Bureau\Pyhton App
+Program                   : python
+Process ID                : 11268
+User                      : Ghaith.BenTouati
+Hardware                  : PC with Windows NT 16x AMD64 Level 6 (Mod 154 Step 3)
+Operating_system          : Windows NT 10.0
+Hostname                  : JENWPC0888
+IP address                : 192.168.71.161
+IPv6 address              : fe80::5a8e:4868:df28:aa71
+Global trace level        : 0
+
+2024-07-02 09:56:11.172670 [11920] >> Info entry
+	Did not find config file C:\Users\Ghaith.bentouati\OneDrive - Sumitomo Wiring Systems\Bureau\Pyhton App\sapnwrfc.ini.
+2024-07-02 09:56:22.498600 [11920] >> Error entry
+	[Handle: 2866073512528	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '137.121.21.13:3313' not reached
+TIME        Tue Jul  2 09:56:22 2024
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3454
+DETAIL      NiPConnect2: 137.121.21.13:3313
+SYSTEM CALL connect
+ERRNO       10053
+ERRNO TEXT  WSAECONNABORTED: Software caused connection abort
+COUNTER     2
+

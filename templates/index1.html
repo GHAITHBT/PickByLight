@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAP JIT Call Components Fetcher</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">SAP JIT Call Components Fetcher</h1>
+        <div class="alert alert-info" role="alert">
+            Connected to SAP system: {{ sap_system }}
+        </div>
+        <form id="jitForm">
+            <div class="form-group">
+                <label for="prodnInput">Enter PRODN:</label>
+                <input type="text" class="form-control" id="prodnInput" name="prodn">
+            </div>
+            <button type="submit" class="btn btn-primary">Fetch JIT Call Components</button>
+        </form>
+        <br>
+        <div class="alert alert-info" role="alert" id="executionTime">
+            <!-- Execution time will be displayed here -->
+        </div>
+        <div class="mt-4" id="resultDisplay">
+            <!-- Table to display JIT Call Components and associated BOM data -->
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Material</th>
+                        <th scope="col">Plant</th>
+                        <th scope="col">Component</th>
+                        <th scope="col">Quantity</th>
+                    </tr>
+                </thead>
+                <tbody id="jitTableBody">
+                    <!-- Table rows will be populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#jitForm').submit(function(e) {
+                e.preventDefault();
+                var prodnValue = $('#prodnInput').val().trim();
+                if (!prodnValue) {
+                    alert('Please enter a PRODN value.');
+                    return;
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: '/fetch_jit_components',
+                    data: $('#jitForm').serialize(),
+                    success: function(response) {
+                        if (response.error) {
+                            alert(response.error);
+                            $('#jitTableBody').empty(); // Clear table on error
+                        } else {
+                            displayJitComponents(response.results);
+                            $('#executionTime').text('Execution time: ' + response.execution_time.toFixed(2) + ' seconds');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                        alert('Failed to fetch JIT Call Components.');
+                        $('#jitTableBody').empty(); // Clear table on error
+                    }
+                });
+            });
+
+            // Function to display JIT Call Components and associated BOM data in the table
+            function displayJitComponents(results) {
+                $('#jitTableBody').empty(); // Clear previous data
+                $.each(results, function(index, result) {
+                    var component = result.component;
+                    var bomData = result.bom_data;
+
+                    var row = '<tr>' +
+                                '<td>' + component.MATERIAL + '</td>' +
+                                '<td>' + component.SHIP_POINT + '</td>' +
+                                '<td>' + component.SHORT_TEXT + '</td>' +
+                                '<td>' + component.QUANTITY + '</td>' +
+                              '</tr>';
+                    $('#jitTableBody').append(row);
+
+                    if (bomData && bomData.length > 0) {
+                        var bomRow = '<tr>' +
+                                        '<td colspan="4">' +
+                                            '<table class="table">' +
+                                                '<thead>' +
+                                                    '<tr>' +
+                                                        '<th scope="col">BOM Material</th>' +
+                                                        '<th scope="col">BOM Description</th>' +
+                                                        '<th scope="col">BOM Quantity</th>' +
+                                                    '</tr>' +
+                                                '</thead>' +
+                                                '<tbody>';
+                        $.each(bomData, function(i, bomItem) {
+                            bomRow += '<tr>' +
+                                        '<td>' + bomItem.Material + '</td>' +
+                                        '<td>' + bomItem.Description + '</td>' +
+                                        '<td>' + bomItem.Quantity + '</td>' +
+                                      '</tr>';
+                        });
+                        bomRow += '</tbody></table></td></tr>';
+                        $('#jitTableBody').append(bomRow);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
