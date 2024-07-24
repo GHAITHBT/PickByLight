@@ -7,17 +7,16 @@ import logging
 import traceback
 import time
 import redis
-import json
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'  # Change this to a secure key
 
 # SAP and MySQL connection parameters
 SAP_CONN_PARAMS = {
-    "user": "touatigb",
-    "passwd": "NEver@winfcd100",
-    "ashost": "137.121.21.13",
-    "sysnr": "13",
+      "user": "MIGRATION",
+    "passwd": "migSEBN99#",
+    "ashost": "137.121.21.6",
+    "sysnr": "06",
     "client": "100",
     "lang": "en",
 }
@@ -167,58 +166,17 @@ def fetch_bom_data_concurrently(material, results, index):
     bom_data = fetch_bom_data(material)
     results[index] = bom_data
 
-# Function to fetch exclusion list from MySQL
-def fetch_exclusion_list():
-    try:
-        conn_mysql = mysql_pool.get_connection()
-        cursor = conn_mysql.cursor()
-        cursor.execute("SELECT material FROM exclusion_list")
-        exclusion_list = [row[0] for row in cursor.fetchall()]
-        cursor.close()
-        conn_mysql.close()
-        return exclusion_list
-    except MySQLError as err:
-        logging.error(f"Failed to fetch exclusion list from MySQL: {err}")
-        return []
-
-# Function to add material to exclusion list
-def add_to_exclusion_list(material):
-    try:
-        conn_mysql = mysql_pool.get_connection()
-        cursor = conn_mysql.cursor()
-        cursor.execute("INSERT INTO exclusion_list (material) VALUES (%s)", (material,))
-        conn_mysql.commit()
-        cursor.close()
-        conn_mysql.close()
-    except MySQLError as err:
-        logging.error(f"Failed to add material to exclusion list: {err}")
-
-# Function to remove material from exclusion list
-def remove_from_exclusion_list(material):
-    try:
-        conn_mysql = mysql_pool.get_connection()
-        cursor = conn_mysql.cursor()
-        cursor.execute("DELETE FROM exclusion_list WHERE material = %s", (material,))
-        conn_mysql.commit()
-        cursor.close()
-        conn_mysql.close()
-    except MySQLError as err:
-        logging.error(f"Failed to remove material from exclusion list: {err}")
-
 # Flask routes
 @app.route('/')
 def index():
     sap_system = identify_sap_system()
-    return render_template('index3.html', sap_system=sap_system)
+    return render_template('index1.html', sap_system=sap_system)
 
 @app.route('/fetch_jit_components', methods=['POST'])
 def fetch_jit_components():
     start_time = time.time()  # Start the timer
 
     prodn = request.form['prodn'].strip()
-    exclusion_list = request.form.get('exclusion_list', '[]')
-    exclusion_list = json.loads(exclusion_list)  # Parse JSON string to list
-
     if not prodn:
         return jsonify({'error': 'Please enter a PRODN value.'}), 400
 
@@ -235,10 +193,9 @@ def fetch_jit_components():
     results = [None] * len(jitcalcomponents)
     for i, component in enumerate(jitcalcomponents):
         material = component['MATERIAL']  # Assuming 'MATERIAL' is the key for material number
-        if material not in exclusion_list:  # Exclude materials in the exclusion list
-            thread = threading.Thread(target=fetch_bom_data_concurrently, args=(material, results, i))
-            threads.append(thread)
-            thread.start()
+        thread = threading.Thread(target=fetch_bom_data_concurrently, args=(material, results, i))
+        threads.append(thread)
+        thread.start()
 
     for thread in threads:
         thread.join()
@@ -246,8 +203,7 @@ def fetch_jit_components():
     # Prepare the response
     response = []
     for i, component in enumerate(jitcalcomponents):
-        if results[i] is not None:  # Only include non-excluded components
-            response.append({'component': component, 'bom_data': results[i]})
+        response.append({'component': component, 'bom_data': results[i]})
 
     execution_time = time.time() - start_time  # Calculate the execution time
     return jsonify({'results': response, 'execution_time': execution_time}), 200
@@ -280,40 +236,17 @@ def fetch_jit_components_api():
     for thread in threads:
         thread.join()
 
-    # Prepare the response
+    # Prepare the response with CUST_MAT and its BOM data
     response = []
     for i, component in enumerate(jitcalcomponents):
-        if results[i] is not None:
-            response.append({'component': component, 'bom_data': results[i]})
+        cust_mat = component.get('CUST_MAT', '')
+        bom_data = results[i] if results[i] else []
+        response.append({'CUST_MAT': cust_mat, 'BOM': bom_data})
 
     execution_time = time.time() - start_time  # Calculate the execution time
     return jsonify({'results': response, 'execution_time': execution_time}), 200
 
-# Endpoint to fetch exclusion list
-@app.route('/exclusion_list', methods=['GET'])
-def get_exclusion_list():
-    exclusion_list = fetch_exclusion_list()
-    return jsonify({'exclusion_list': exclusion_list})
-
-# Endpoint to add to exclusion list
-@app.route('/exclusion_list', methods=['POST'])
-def add_exclusion():
-    material = request.form['material'].strip()
-    if not material:
-        return jsonify({'error': 'Please provide a material.'}), 400
-    
-    add_to_exclusion_list(material)
-    return jsonify({'message': f'Material {material} added to exclusion list.'}), 200
-
-# Endpoint to remove from exclusion list
-@app.route('/exclusion_list', methods=['DELETE'])
-def remove_exclusion():
-    material = request.form['material'].strip()
-    if not material:
-        return jsonify({'error': 'Please provide a material.'}), 400
-    
-    remove_from_exclusion_list(material)
-    return jsonify({'message': f'Material {material} removed from exclusion list.'}), 200
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(debug=True)
+# http://localhost:5000/fetch_jit_components_api?PRODN=240825036001

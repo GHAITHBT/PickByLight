@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Material Lookup</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+        }
+        .btn {
+            margin-top: 20px;
+        }
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2 class="card-title">Lookup Material</h2>
+            <form id="lookup-form">
+                <div class="form-group">
+                    <label for="material-id">Enter Material ID:</label>
+                    <input type="number" class="form-control" id="material-id" placeholder="Enter ID">
+                </div>
+                <button type="submit" class="btn btn-primary">Lookup Material</button>
+            </form>
+            <div id="result" class="alert" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('lookup-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var materialId = document.getElementById('material-id').value;
+            fetch(`/material/${materialId}`)
+                .then(response => response.json())
+                .then(data => {
+                    var result = document.getElementById('result');
+                    if (data.error) {
+                        result.className = 'alert alert-danger';
+                        result.innerText = data.error;
+                    } else {
+                        result.className = 'alert alert-success';
+                        result.innerText = `ID: ${data.id}, Name: ${data.name}, Status: ${data.status}`;
+                    }
+                    result.style.display = 'block';
+                });
+        });
+    </script>
+</body>
+</html>

@@ -3,10 +3,10 @@ import mysql.connector
 
 # SAP connection parameters defined in code
 SAP_CONN_PARAMS = {
-    "user": "touatigb",
-    "passwd": "NEver@winfcd100",
-    "ashost": "137.121.21.13",
-    "sysnr": "13",
+    "user": "MIGRATION",
+    "passwd": "migSEBN99#",
+    "ashost": "137.121.21.6",
+    "sysnr": "06",
     "client": "100",
     "lang": "en",
 }

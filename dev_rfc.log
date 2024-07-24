@@ -36,3 +36,373 @@ ERRNO       10053
 ERRNO TEXT  WSAECONNABORTED: Software caused connection abort
 COUNTER     2
 
+
+**** Log file opened at 2024-07-22 12:15:56.880540 UTC+01:00 (Afr. centrale Ouest), Encoding UTF-8
+NW RFC Library: Kernel variant, Release 750 Patch Level 11
+Compilation date          : Feb 23 2023 04:53:17
+CPIC library              : 753.2022.12.23 version 3
+NI library                : 40
+Kernel Release            : 753 Patch Level 1120
+Current working directory : C:\Users\Ghaith.bentouati\OneDrive - Sumitomo Wiring Systems\Bureau\Python App
+Program                   : python
+Process ID                : 25604
+User                      : Ghaith.BenTouati
+Hardware                  : PC with Windows NT 16x AMD64 Level 6 (Mod 154 Step 3)
+Operating_system          : Windows NT 10.0
+Hostname                  : JENWPC0888
+IP address                : 10.110.20.231
+IPv6 address              : fe80::5a8e:4868:df28:aa71
+Global trace level        : 0
+
+2024-07-22 12:15:56.875918 [10784] >> Error entry
+	[Handle: 2418133486096	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '137.121.21.13:3313' not reached
+TIME        Mon Jul 22 12:15:56 2024
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3454
+DETAIL      NiPConnect2: 137.121.21.13:3313
+SYSTEM CALL connect
+ERRNO       10060
+ERRNO TEXT  WSAETIMEDOUT: Connection timed out
+COUNTER     2
+
+2024-07-22 12:16:12.015395 [21480] >> Error entry
+	[Handle: 2418133463008	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '137.121.21.13:3313' not reached
+TIME        Mon Jul 22 12:16:12 2024
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3454
+DETAIL      NiPConnect2: 137.121.21.13:3313
+SYSTEM CALL connect
+ERRNO       10060
+ERRNO TEXT  WSAETIMEDOUT: Connection timed out
+COUNTER     2
+
+
+**** Log file opened at 2024-07-22 14:57:26.802070 UTC+01:00 (Afr. centrale Ouest), Encoding UTF-8
+NW RFC Library: Kernel variant, Release 750 Patch Level 11
+Compilation date          : Feb 23 2023 04:53:17
+CPIC library              : 753.2022.12.23 version 3
+NI library                : 40
+Kernel Release            : 753 Patch Level 1120
+Current working directory : C:\Users\Ghaith.bentouati\OneDrive - Sumitomo Wiring Systems\Bureau\Python App
+Program                   : python
+Process ID                : 15688
+User                      : Ghaith.BenTouati
+Hardware                  : PC with Windows NT 16x AMD64 Level 6 (Mod 154 Step 3)
+Operating_system          : Windows NT 10.0
+Hostname                  : JENWPC0888
+IP address                : 10.110.15.107
+IPv6 address              : fe80::5a8e:4868:df28:aa71
+Global trace level        : 0
+
+2024-07-22 14:57:26.796097 [03832] >> Error entry
+	[Handle: 2165041660576	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '137.121.21.6:3300' not reached
+TIME        Mon Jul 22 14:57:26 2024
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3454
+DETAIL      NiPConnect2: 137.121.21.6:3300
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     2
+
+
+**** Log file opened at 2024-07-22 14:58:53.222790 UTC+01:00 (Afr. centrale Ouest), Encoding UTF-8
+NW RFC Library: Kernel variant, Release 750 Patch Level 11
+Compilation date          : Feb 23 2023 04:53:17
+CPIC library              : 753.2022.12.23 version 3
+NI library                : 40
+Kernel Release            : 753 Patch Level 1120
+Current working directory : C:\Users\Ghaith.bentouati\OneDrive - Sumitomo Wiring Systems\Bureau\Python App
+Program                   : python
+Process ID                : 03304
+User                      : Ghaith.BenTouati
+Hardware                  : PC with Windows NT 16x AMD64 Level 6 (Mod 154 Step 3)
+Operating_system          : Windows NT 10.0
+Hostname                  : JENWPC0888
+IP address                : 10.110.15.107
+IPv6 address              : fe80::5a8e:4868:df28:aa71
+Global trace level        : 0
+
+2024-07-22 14:58:53.217906 [16408] >> Error entry
+	[Handle: 2418202635888	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '137.121.21.6:3300' not reached
+TIME        Mon Jul 22 14:58:53 2024
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3454
+DETAIL      NiPConnect2: 137.121.21.6:3300
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     2
+
+
+**** Log file opened at 2024-07-23 08:34:39.253432 UTC+01:00 (Afr. centrale Ouest), Encoding UTF-8
+NW RFC Library: Kernel variant, Release 750 Patch Level 11
+Compilation date          : Feb 23 2023 04:53:17
+CPIC library              : 753.2022.12.23 version 3
+NI library                : 40
+Kernel Release            : 753 Patch Level 1120
+Current working directory : C:\Users\Ghaith.bentouati\OneDrive - Sumitomo Wiring Systems\Bureau\Python App
+Program                   : python
+Process ID                : 23444
+User                      : Ghaith.BenTouati
+Hardware                  : PC with Windows NT 16x AMD64 Level 6 (Mod 154 Step 3)
+Operating_system          : Windows NT 10.0
+Hostname                  : JENWPC0888
+IP address                : 10.110.15.107
+IPv6 address              : fe80::5a8e:4868:df28:aa71
+Global trace level        : 0
+
+2024-07-23 08:34:39.252481 [26768] >> Error entry
+	[Handle: 2544602440672	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '137.121.21.6:3306' not reached
+TIME        Tue Jul 23 08:34:39 2024
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3454
+DETAIL      NiPConnect2: 137.121.21.6:3306
+SYSTEM CALL connect
+ERRNO       10060
+ERRNO TEXT  WSAETIMEDOUT: Connection timed out
+COUNTER     2
+
+
+**** Log file opened at 2024-07-23 13:38:25.774642 UTC+01:00 (Afr. centrale Ouest), Encoding UTF-8
+NW RFC Library: Kernel variant, Release 750 Patch Level 11
+Compilation date          : Feb 23 2023 04:53:17
+CPIC library              : 753.2022.12.23 version 3
+NI library                : 40
+Kernel Release            : 753 Patch Level 1120
+Current working directory : C:\Users\Ghaith.bentouati\OneDrive - Sumitomo Wiring Systems\Bureau\Python App
+Program                   : python
+Process ID                : 18980
+User                      : Ghaith.BenTouati
+Hardware                  : PC with Windows NT 16x AMD64 Level 6 (Mod 154 Step 3)
+Operating_system          : Windows NT 10.0
+Hostname                  : JENWPC0888
+IP address                : 10.110.20.231
+IPv6 address              : fe80::5a8e:4868:df28:aa71
+Global trace level        : 0
+
+2024-07-23 13:38:25.768726 [04000] >> Error entry
+	[Handle: 2164366195760	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '137.121.21.6:3306' not reached
+TIME        Tue Jul 23 13:38:25 2024
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3454
+DETAIL      NiPConnect2: 137.121.21.6:3306
+SYSTEM CALL connect
+ERRNO       10060
+ERRNO TEXT  WSAETIMEDOUT: Connection timed out
+COUNTER     2
+
+
+**** Log file opened at 2024-07-23 15:15:26.712355 UTC+01:00 (Afr. centrale Ouest), Encoding UTF-8
+NW RFC Library: Kernel variant, Release 750 Patch Level 11
+Compilation date          : Feb 23 2023 04:53:17
+CPIC library              : 753.2022.12.23 version 3
+NI library                : 40
+Kernel Release            : 753 Patch Level 1120
+Current working directory : C:\Users\Ghaith.bentouati\OneDrive - Sumitomo Wiring Systems\Bureau\Python App
+Program                   : python
+Process ID                : 29356
+User                      : Ghaith.BenTouati
+Hardware                  : PC with Windows NT 16x AMD64 Level 6 (Mod 154 Step 3)
+Operating_system          : Windows NT 10.0
+Hostname                  : JENWPC0888
+IP address                : 10.110.20.231
+IPv6 address              : fe80::5a8e:4868:df28:aa71
+Global trace level        : 0
+
+2024-07-23 15:15:26.711138 [25012] >> Error entry
+	[Handle: 2634740226080	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       max no of 200 conversations exceeded
+TIME        Tue Jul 23 15:15:26 2024
+RELEASE     753
+COMPONENT   CPIC (TCP/IP) with Unicode
+VERSION     3
+RC          466
+MODULE      D:/depot/bas/753_REL/src/krn/si/cpic/r3cpic.c
+LINE        16088
+COUNTER     1
+
+2024-07-23 15:15:26.711185 [23124] >> Error entry
+	[Handle: 2634740241472	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       max no of 200 conversations exceeded
+TIME        Tue Jul 23 15:15:26 2024
+RELEASE     753
+COMPONENT   CPIC (TCP/IP) with Unicode
+VERSION     3
+RC          466
+MODULE      D:/depot/bas/753_REL/src/krn/si/cpic/r3cpic.c
+LINE        16088
+COUNTER     1
+
+2024-07-23 15:15:26.714547 [29992] >> Error entry
+	[Handle: 2634740210688	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       max no of 200 conversations exceeded
+TIME        Tue Jul 23 15:15:26 2024
+RELEASE     753
+COMPONENT   CPIC (TCP/IP) with Unicode
+VERSION     3
+RC          466
+MODULE      D:/depot/bas/753_REL/src/krn/si/cpic/r3cpic.c
+LINE        16088
+COUNTER     1
+
+2024-07-23 15:15:26.728155 [23408] >> Error entry
+	[Handle: 2634740226080	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       max no of 200 conversations exceeded
+TIME        Tue Jul 23 15:15:26 2024
+RELEASE     753
+COMPONENT   CPIC (TCP/IP) with Unicode
+VERSION     3
+RC          466
+MODULE      D:/depot/bas/753_REL/src/krn/si/cpic/r3cpic.c
+LINE        16088
+COUNTER     1
+
+2024-07-23 15:15:26.733330 [03588] >> Error entry
+	[Handle: 2634740241472	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       max no of 200 conversations exceeded
+TIME        Tue Jul 23 15:15:26 2024
+RELEASE     753
+COMPONENT   CPIC (TCP/IP) with Unicode
+VERSION     3
+RC          466
+MODULE      D:/depot/bas/753_REL/src/krn/si/cpic/r3cpic.c
+LINE        16088
+COUNTER     1
+
+2024-07-23 15:15:26.736283 [27872] >> Error entry
+	[Handle: 2634740210688	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       max no of 200 conversations exceeded
+TIME        Tue Jul 23 15:15:26 2024
+RELEASE     753
+COMPONENT   CPIC (TCP/IP) with Unicode
+VERSION     3
+RC          466
+MODULE      D:/depot/bas/753_REL/src/krn/si/cpic/r3cpic.c
+LINE        16088
+COUNTER     1
+
+2024-07-23 15:15:26.741062 [17444] >> Error entry
+	[Handle: 2634740241472	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       max no of 200 conversations exceeded
+TIME        Tue Jul 23 15:15:26 2024
+RELEASE     753
+COMPONENT   CPIC (TCP/IP) with Unicode
+VERSION     3
+RC          466
+MODULE      D:/depot/bas/753_REL/src/krn/si/cpic/r3cpic.c
+LINE        16088
+COUNTER     1
+
+2024-07-23 15:15:26.742744 [23772] >> Error entry
+	[Handle: 2634740210688	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       max no of 200 conversations exceeded
+TIME        Tue Jul 23 15:15:26 2024
+RELEASE     753
+COMPONENT   CPIC (TCP/IP) with Unicode
+VERSION     3
+RC          466
+MODULE      D:/depot/bas/753_REL/src/krn/si/cpic/r3cpic.c
+LINE        16088
+COUNTER     1
+
+2024-07-23 15:15:26.746097 [01760] >> Error entry
+	[Handle: 2634740226080	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       max no of 200 conversations exceeded
+TIME        Tue Jul 23 15:15:26 2024
+RELEASE     753
+COMPONENT   CPIC (TCP/IP) with Unicode
+VERSION     3
+RC          466
+MODULE      D:/depot/bas/753_REL/src/krn/si/cpic/r3cpic.c
+LINE        16088
+COUNTER     1
+
+2024-07-23 15:15:26.749583 [22768] >> Error entry
+	[Handle: 2634740226080	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       max no of 200 conversations exceeded
+TIME        Tue Jul 23 15:15:26 2024
+RELEASE     753
+COMPONENT   CPIC (TCP/IP) with Unicode
+VERSION     3
+RC          466
+MODULE      D:/depot/bas/753_REL/src/krn/si/cpic/r3cpic.c
+LINE        16088
+COUNTER     1
+
+2024-07-23 15:15:26.755462 [26572] >> Error entry
+	[Handle: 2634740210688	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       max no of 200 conversations exceeded
+TIME        Tue Jul 23 15:15:26 2024
+RELEASE     753
+COMPONENT   CPIC (TCP/IP) with Unicode
+VERSION     3
+RC          466
+MODULE      D:/depot/bas/753_REL/src/krn/si/cpic/r3cpic.c
+LINE        16088
+COUNTER     1
+

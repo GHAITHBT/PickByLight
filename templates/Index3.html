@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JIT Components</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>JIT Components for SAP System {{ sap_system }}</h1>
+        <form id="jit-form">
+            <div class="form-group">
+                <label for="prodn">PRODN:</label>
+                <input type="text" class="form-control" id="prodn" name="prodn" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Fetch JIT Components</button>
+        </form>
+        <div id="results" class="mt-5"></div>
+        <button id="manageExclusionsBtn" class="btn btn-secondary mt-4">Manage Exclusion List</button>
+    </div>
+
+    <!-- Modal for managing exclusion list -->
+    <div class="modal fade" id="exclusionModal" tabindex="-1" role="dialog" aria-labelledby="exclusionModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exclusionModalLabel">Manage Exclusion List</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul id="exclusionList" class="list-group mb-3"></ul>
+                    <div class="form-group">
+                        <label for="newMaterial">Add Material:</label>
+                        <input type="text" class="form-control" id="newMaterial" placeholder="Enter material to exclude">
+                    </div>
+                    <button id="addMaterialBtn" class="btn btn-success">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Fetch and display exclusion list
+            function fetchExclusionList() {
+                $.get('/exclusion_list', function(data) {
+                    const exclusionList = data.exclusion_list;
+                    const exclusionListElem = $('#exclusionList');
+                    exclusionListElem.empty();
+                    exclusionList.forEach(material => {
+                        exclusionListElem.append(`<li class="list-group-item d-flex justify-content-between align-items-center">
+                            ${material}
+                            <button class="btn btn-danger btn-sm remove-material-btn" data-material="${material}">&times;</button>
+                        </li>`);
+                    });
+                }).fail(function(response) {
+                    alert('Failed to fetch exclusion list: ' + response.responseJSON.error);
+                });
+            }
+
+            // Open exclusion list modal
+            $('#manageExclusionsBtn').on('click', function() {
+                fetchExclusionList();
+                $('#exclusionModal').modal('show');
+            });
+
+            // Add material to exclusion list
+            $('#addMaterialBtn').on('click', function() {
+                const newMaterial = $('#newMaterial').val().trim();
+                if (newMaterial) {
+                    $.post('/exclusion_list', { material: newMaterial }, function(response) {
+                        $('#newMaterial').val('');
+                        fetchExclusionList(); // Refresh the list after adding
+                    }).fail(function(response) {
+                        alert('Failed to add material: ' + response.responseJSON.error);
+                    });
+                }
+            });
+
+            // Remove material from exclusion list
+            $(document).on('click', '.remove-material-btn', function() {
+                const material = $(this).data('material');
+                $.ajax({
+                    url: '/exclusion_list',
+                    type: 'DELETE',
+                    data: { material: material },
+                    success: function(response) {
+                        fetchExclusionList(); // Refresh the list after removing
+                    },
+                    error: function(response) {
+                        alert('Failed to remove material: ' + response.responseJSON.error);
+                    }
+                });
+            });
+
+            // Fetch JIT components form submission
+            $('#jit-form').on('submit', function(event) {
+                event.preventDefault();
+                const prodn = $('#prodn').val().trim();
+                // Get exclusion list materials from the modal
+                const exclusionList = $('#exclusionList .list-group-item').map(function() {
+                    return $(this).text().trim();
+                }).get();
+                
+                $.post('/fetch_jit_components', { prodn: prodn, exclusion_list: JSON.stringify(exclusionList) }, function(data) {
+                    const results = data.results;
+                    const resultsElem = $('#results');
+                    resultsElem.empty();
+                    results.forEach(item => {
+                        resultsElem.append(`<div class="card mb-3">
+                            <div class="card-header">Component: ${item.component.MATERIAL}</div>
+                            <div class="card-body">
+                                <h5 class="card-title">BOM Data</h5>
+                                <pre>${JSON.stringify(item.bom_data, null, 2)}</pre>
+                            </div>
+                        </div>`);
+                    });
+                }).fail(function(response) {
+                    alert('Failed to fetch JIT components: ' + response.responseJSON.error);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
